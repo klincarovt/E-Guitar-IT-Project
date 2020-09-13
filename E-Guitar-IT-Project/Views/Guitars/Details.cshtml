@@ -1,0 +1,61 @@
+﻿@model E_Guitar_IT_Project.Models.Guitar
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Guitar</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Category.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Category.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.UrlImg)
+        </dt>
+
+        <dd>
+			<img style="max-width:300px; max-height:300px" src="@Model.UrlImg" )" alt="IMAGES" />
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Price)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Price)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Samples)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Samples)
+        </dd>
+
+    </dl>
+</div>
+<p>
+	@if (User.IsInRole("ADMIN"))
+	{
+		@Html.ActionLink("Edit", "Edit", new { id = Model.id },new { @class="btn btn-primary"}) 
+	}
+	@Html.ActionLink("Back to List", "Index","Guitars", new { @class = "btn btn-primary" })
+</p>

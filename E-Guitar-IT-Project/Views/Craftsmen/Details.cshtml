@@ -1,0 +1,78 @@
+﻿@model E_Guitar_IT_Project.Models.CraftsmenViewModel
+@{
+	ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+	<h4>Craftsman</h4>
+	<hr />
+	<dl class="dl-horizontal">
+		<dt>
+			@Html.DisplayNameFor(model => model.Name)
+		</dt>
+
+		<dd>
+			@Html.DisplayFor(model => model.Name)
+		</dd>
+
+		<dt>
+			@Html.DisplayNameFor(model => model.Surname)
+		</dt>
+
+
+		<dd>
+			@Html.DisplayFor(model => model.Surname)
+		</dd>
+
+		<dt>
+			@Html.DisplayNameFor(model => model.Description)
+		</dt>
+
+
+		<dd>
+			@Html.DisplayFor(model => model.Description)
+		</dd>
+
+		<dt>
+			@Html.DisplayNameFor(model => model.Address)
+		</dt>
+		<dt>
+
+			<b>Worked on</b>
+
+		</dt>
+		<dd>
+			@Html.DisplayFor(model => model.Address)
+		</dd>
+
+		<dd>
+
+			<ul class="list-group">
+
+				@foreach (var item in Model.Guitars)
+				{
+					if (item.Checked)
+					{
+
+						<li>
+							@item.Name
+						</li>
+
+					}
+
+				}
+			</ul>
+		</dd>
+
+	</dl>
+</div>
+<p>
+	@if (User.IsInRole("ADMIN") || User.IsInRole("EDITOR"))
+	{
+		@Html.ActionLink("Edit", "Edit", new { id = Model.CrafrsmanID }, new { @class = "btn btn-primary" })
+	}
+	
+	@Html.ActionLink("Back to List", "Index","Craftsmen", new { @class = "btn btn-primary" })
+</p>

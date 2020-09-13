@@ -1,0 +1,98 @@
+﻿@model IEnumerable<E_Guitar_IT_Project.Models.Craftsman>
+
+@{
+	ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+	@if(User.IsInRole("ADMIN") || User.IsInRole("EDITOR"))
+	{ 
+	@Html.ActionLink("Create New", "Create","Craftsmen",new {@class="btn btn-primary" })
+	}
+	
+</p>
+<table class="table" id="tId">
+	<thead>
+	<tr>
+		<th>
+			@Html.DisplayNameFor(model => model.Name)
+		</th>
+		<th>
+			@Html.DisplayNameFor(model => model.Surname)
+		</th>
+		<th>
+			@Html.DisplayNameFor(model => model.Description)
+		</th>
+		<th>
+			@Html.DisplayNameFor(model => model.Address)
+		</th>
+		<th></th>
+	</tr>
+	</thead>
+	<tbody>
+	@foreach (var item in Model)
+	{
+		<tr>
+			<td>
+				
+				@Html.ActionLink(item.Name, "Details", new { id = item.id })
+			</td>
+			<td>
+				
+				@Html.ActionLink(item.Surname, "Details", new { id = item.id })
+			</td>
+			<td>
+				@Html.DisplayFor(modelItem => item.Description)
+			</td>
+			<td>
+				@Html.DisplayFor(modelItem => item.Address)
+			</td>
+			<td>
+				@if (User.IsInRole("ADMIN") || User.IsInRole("EDITOR"))
+				{
+
+					@Html.ActionLink("Edit", "Edit", new { id = item.id }, new {@class="btn btn-primary" })
+				}
+				
+
+			
+				@if (User.IsInRole("ADMIN") || User.IsInRole("EDITOR"))
+				{
+
+					@Html.ActionLink("Delete", "Delete", new { id = item.id },new {@class="btn btn-danger" })
+
+				}
+
+
+			</td>
+		</tr>
+	}
+	</tbody>
+</table>
+
+@section scripts{
+	<script>
+		$("#tId").DataTable();
+
+		onmouseover = "this.bgColor='white'; this.style.color='black'"
+
+		onmouseout = "this.bgColor='black'; this.style.color='white'"
+		$(document).ready(function () {
+			$("#tId tbody tr").hover(function () {
+				$(this).css("background", "#F0F0F0");
+			},
+				function () {
+					$(this).css("background", "#FFF");
+				});
+		});
+
+		$('#tId tbody tr').hover(function () {
+			$(this).stop().animate({ fontSize: '15px' });
+		},
+			function () {
+				$(this).stop().animate({ fontSize: '12px' });
+			});
+	</script>	
+}

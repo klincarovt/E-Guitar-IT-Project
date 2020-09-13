@@ -1,0 +1,110 @@
+﻿@model E_Guitar_IT_Project.Models.ShoppingCartViewModel
+
+@{
+	ViewBag.Title = "Index";
+}
+
+<h2>@Html.LabelFor(model => model.CartItems, htmlAttributes: new { @class = "control-label col-md-2" })</h2>
+
+
+<table class="table" id="tableId">
+	<thead>
+		<tr>
+			<th>
+				Name
+			</th>
+			<th>
+				Image
+
+			</th>
+
+			<th>
+				Price
+			</th>
+			<th>
+				Quantity
+			</th>
+			
+			<th></th>
+		</tr>
+	</thead>
+	
+
+	<tbody>
+
+
+		@for (int i = 0; i < Model.CartItems.Count(); i++)
+		{
+		<tr>
+			<td>
+				@Html.HiddenFor(m => Model.CartItems[i].Guitar.id)
+				@Html.DisplayFor(m => Model.CartItems[i].Guitar.Name)
+			</td>
+			<td>
+				<img src="@Model.CartItems[i].Guitar.UrlImg" style="max-height:100px;max-width:100px;" />
+				
+			</td>
+			<td>
+				@Html.DisplayFor(m => Model.CartItems[i].Guitar.Price)
+
+			</td>
+			<td>
+				@Html.DisplayFor(m => Model.CartItems[i].Quantity)
+			</td>
+
+			<td>
+				@Html.ActionLink("Add more", "AddToCart", new { id = Model.CartItems[i].Guitar.id } , new {@class="btn btn-success" })
+				@Html.ActionLink("Delete", "Delete", new { id = Model.CartItems[i].id },new { @class = "btn btn-danger" })
+
+			</td>
+
+		</tr>
+	     }
+	</tbody>
+
+</table>
+
+@section scripts{
+	<script>
+		$("#tableId").DataTable();
+
+
+		$("#tableId").DataTable();
+
+
+
+		$(function () {
+			$("#tableId img").mouseover(function () {
+				$(this).animate({ height: '+=25', width: '+=25' })
+			});
+		});
+
+		$(function () {
+			$("#tableId img").mouseout(function () {
+				$(this).animate({ height: '-=25', width: '-=25' })
+			});
+		});
+
+
+
+
+		onmouseover = "this.bgColor='white'; this.style.color='black'"
+
+		onmouseout = "this.bgColor='black'; this.style.color='white'"
+		$(document).ready(function () {
+			$("#tableId tbody tr").hover(function () {
+				$(this).css("background", "#F0F0F0");
+			},
+				function () {
+					$(this).css("background", "#FFF");
+				});
+		});
+
+		$('#tableId tbody tr').hover(function () {
+			$(this).stop().animate({ fontSize: '17px' });
+		},
+			function () {
+				$(this).stop().animate({ fontSize: '14px' });
+			});
+	</script>
+}
